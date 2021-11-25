@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(5,5,135,1) 0%, rgba(19,33,52,1) 100%, rgba(0,212,255,1) 100%);
+  }
+  ol, ul {
+    list-style: none;
+  }
+  h1{
+    text-align: center;
+
+
+  }
+  
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+  }
+
+
+.container-wrapper {
+    position: absolute;
+    display: grid;
+    border-radius: 5px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    height: 70%;
+
+
+  }
+
+#board{
+    position: relative;
+    display: grid;
+    height: 100%;
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.square{
+border: solid white;
+border-right: none;
+border-top: none;
+text-align: center;
+font-size: 50px;
+color: white;
+font-family: 'Lobster', cursive;
+
+}
+.bottom{
+  border-bottom: none;
+}
+.bLeft{
+  border-left: none;
+}
+
+#reset-btn{
+align-self: center;
+justify-self: center;
+width: 95px;
+height: 50px;
+}
+
+
+.navbar{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 16px;
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(5,5,135,1) 0%, rgba(19,33,52,1) 100%, rgba(0,212,255,1) 100%);
+  font-size: 18px;
+  font-family: 'Lobster', cursive;
+}
+ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  gap: 16px;
+
+}
+.left, .right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.navbar a {
+  /* this removes the line under our links */
+  text-decoration: none;
+  color: #e5e7eb;
+  font-size: 18px;
+}
+.logo{
+  color: #F9FAF8;
+  font-size: 24px;
+}
+.hide{
+  display: none;
+}
+
+button {
+  transition: all .5s ease;
+  color: #fff;
+  border: 3px solid white;
+  font-family:'Montserrat', sans-serif;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1;
+  font-size: 17px;
+  background-color : transparent;
+  padding: 10px;
+  outline: none;
+  border-radius: 4px;
+}
+button:hover {
+  color: #001F3F;
+  background-color: #fff;
+}
+/* MEDIA QUERIES */
+@media screen and (max-width: 600px) {
+  html,body
+  {
+      margin: 0px;
+      padding: 0px;
+      overflow-x: hidden; 
+  }
+  .navbar{
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .navbar .left{
+    font-size: 5px;
+  }
+  .navbar .right{
+    visibility: collapse;
+    visibility: hidden; 
+  }
+  .container-wrapper{
+    width: 70%;
+  }
+ 
+}
