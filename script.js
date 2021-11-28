@@ -19,7 +19,8 @@ const gameBoard = (() =>{
     }
     const setMarkerAI = (index, mark) =>{
         if(!board.children[index]){
-            console.log('END GAME ' + index)
+            alert('its a tie!')
+            endGame()
             return
         }
         if(_board[index] === undefined){
@@ -57,7 +58,6 @@ const AI = (() =>{
 
     const placeMarker = () => {
         let emptyFields = getEmptyFields()
-        console.log(emptyFields)
         let randomInt = getRandomInt()
         if(emptyFields.includes(randomInt)){
             gameBoard.setMarkerAI(randomInt, "O")
@@ -75,6 +75,7 @@ const gameController = (() => {
     const board = document.querySelector("#board");
 
     function checkWinner(){
+        let gameWon = null
         const winningConditions = [
             [0, 1, 2],
             [3, 4, 5],
@@ -85,41 +86,54 @@ const gameController = (() => {
             [0, 4, 8],
             [2, 4, 6]
         ];
+
+        //we need to refactor this
         winningConditions.forEach((item)=>{
 
             if(item.every((it) => gameBoard._board[it] === 'X')){
-                console.log(gameBoard._board)
-                announceWinner("Player")
+                gameWon = item
+                announceWinner("Player", gameWon)
+                endGame();
+                return gameWon
+
             }
             else if(item.every((it) => gameBoard._board[it] === 'O')){
-                announceWinner("CPU")
+                gameWon = item
+                announceWinner("CPU", gameWon)
+                endGame();
+                return gameWon
             }
-            else return
         })
+        return gameWon
     }
 
     const playerMove = (square) =>{
-        if(gameBoard.setMarker(square, 'X') === "ok"){
+        if(checkWinner()) return
+        if(gameBoard.setMarker(square.target.id, 'X') === "ok"){
             aiMove()
         }else{
             return 'WOOPS'
         }
-     
+             
     }
     const aiMove = () => {
+        if(checkWinner()) return
         setTimeout(() => {
             AI.placeMarker()
         }, 100)
+
     }
 
     return{playerMove, checkWinner}
 })();
 
-function announceWinner(player){
-    
-    setTimeout(()=>{
-        alert(player + ' wins!!!')
-    },100) 
+function announceWinner(player, index){
+    const board = document.querySelector('#board')
+    for(let i = 0; i < 3; i++){
+        board.children[index[i]].style.backgroundColor = player === 'CPU' ? 'red' :'green'
+    }
+    alert(player + ' wins!!!')
+    endGame();
 }
 function render(board){
     let gameData = gameBoard._board
@@ -133,33 +147,37 @@ const Player = function(name, mark){
 }
 
 const player1 = new Player("Player One", "X");
-const player2 = new Player("Player One", "0");
+const player2 = new Player("Player Two", "0");
 
 
 function Reset(){
     let flag;
     gameBoard.clear()
     flag = true;
-}
-
-function startGame(){
-    let start;
-    const board = document.querySelector('.container-wrapper')
-    board.classList.toggle('hide')
-    start = true
-    return start
-}
-
-//________________________________________________________________________________________
-/*
-    TEST!
-*/
-const sqaures = document.querySelectorAll('.square');
-
-sqaures.forEach((sqaure) => {
-    sqaure.addEventListener('click', e=>{
-        gameController.playerMove(e.target.id)
+    const sqaures = document.querySelectorAll('.square');
+    sqaures.forEach((sqaure) => {
+        sqaure.style.backgroundColor = ''
     })
-})
+    startGame();
 
-//------------------------------------------------------------------------------>>>>>>>>>>>>>>>>>//
+
+}
+
+const startGame = () =>{
+    const sqaures = document.querySelectorAll('.square');
+    sqaures.forEach((sqaure) => {
+        sqaure.addEventListener('click',gameController.playerMove)
+    })
+
+};
+startGame()
+
+
+function endGame(){
+    const sqaures = document.querySelectorAll('.square');
+    let func = gameController.playerMove
+    sqaures.forEach((sqaure) => {
+        sqaure.removeEventListener('click', func, false)
+    })
+}
+
