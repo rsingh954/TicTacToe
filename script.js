@@ -1,5 +1,11 @@
 'use strict'
+var modal = document.getElementById("myModal");
 
+window.onclick = function(event) {
+    if (event.target != modal) {
+      modal.style.visibility = "hidden";
+    }
+  } 
 
 const gameBoard = (() =>{
     const board = document.querySelector("#board");
@@ -19,7 +25,7 @@ const gameBoard = (() =>{
     }
     const setMarkerAI = (index, mark) =>{
         if(!board.children[index]){
-            alert('its a tie!')
+            announceWinner('Its a tie!')
             endGame()
             return
         }
@@ -127,14 +133,22 @@ const gameController = (() => {
     return{playerMove, checkWinner}
 })();
 
-function announceWinner(player, index){
+function announceWinner(player, index=[0,1,2,3,4,5,6,7,8]){
     const board = document.querySelector('#board')
-    for(let i = 0; i < 3; i++){
-        board.children[index[i]].style.backgroundColor = player === 'CPU' ? 'red' :'green'
+    if(player !== 'Its a tie!'){
+        for(let i = 0; i < 3; i++){
+            board.children[index[i]].style.backgroundColor = player === 'CPU' ? 'red' :'green'
+        }
+    }else{
+        for(let j = 0; j < 9; j++ ){
+            board.children[j].style.backgroundColor = 'green'
+        }
     }
     setTimeout(() => {
-        alert(player + ' wins!!!')
+        modal.style.visibility = "visible";
+        modal.textContent = player === 'Its a tie!'? 'Its a tie!' :  `${player} wins!!!`
     }, 100)
+
     endGame();
 }
 function render(board){
@@ -183,3 +197,28 @@ function endGame(){
     })
 }
 
+// // Get the modal
+// var modal = document.getElementById("myModal");
+
+// // Get the button that opens the modal
+// var btn = document.getElementById("myBtn");
+
+// // Get the <span> element that closes the modal
+// var span = document.getElementsByClassName("close")[0];
+
+// // When the user clicks on the button, open the modal
+// btn.onclick = function() {
+//   modal.style.display = "block";
+// }
+
+// // When the user clicks on <span> (x), close the modal
+// span.onclick = function() {
+//   modal.style.display = "none";
+// }
+
+// // When the user clicks anywhere outside of the modal, close it
+// window.onclick = function(event) {
+//   if (event.target == modal) {
+//     modal.style.display = "none";
+//   }
+// } 

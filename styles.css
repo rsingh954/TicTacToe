@@ -119,6 +119,51 @@ button:hover {
   color: #001F3F;
   background-color: #fff;
 }
+
+ /* The Modal (background) */
+ .modal {
+  display: flex; /* Hidden by default */
+  justify-content: center;
+  align-items: center;
+  margin-left: 25% ;
+  margin-right: 50% ;
+  visibility: hidden;
+  position: fixed; /* Stay in place */
+  left: 0;
+  top: 15%;
+  width: 50%; /* Full width */
+  height: 25%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(5,5,135,1) 0%, rgba(19,33,52,1) 100%, rgba(0,212,255,1) 100%);
+  font-size: 32px;
+  font-family: 'Lobster', cursive;
+  color: #e5e7eb;
+
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(5,5,135,1) 0%, rgba(19,33,52,1) 100%, rgba(0,212,255,1) 100%);
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  width: 80%; /* Could be more or less, depending on screen size */
+
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+} 
 /* MEDIA QUERIES */
 @media screen and (max-width: 600px) {
   html,body
