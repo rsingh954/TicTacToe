@@ -138,6 +138,7 @@ button:hover {
   font-size: 32px;
   font-family: 'Lobster', cursive;
   color: #e5e7eb;
+  text-align: center;
 
 }
 
@@ -147,7 +148,6 @@ button:hover {
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   width: 80%; /* Could be more or less, depending on screen size */
-
 }
 
 /* The Close Button */
