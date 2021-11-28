@@ -132,7 +132,9 @@ function announceWinner(player, index){
     for(let i = 0; i < 3; i++){
         board.children[index[i]].style.backgroundColor = player === 'CPU' ? 'red' :'green'
     }
-    alert(player + ' wins!!!')
+    setTimeout(() => {
+        alert(player + ' wins!!!')
+    }, 100)
     endGame();
 }
 function render(board){
